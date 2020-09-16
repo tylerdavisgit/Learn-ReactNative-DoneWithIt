@@ -11,6 +11,7 @@ export default function RegisterScreen() {
       <AppForm>
         <AppFormField
           autoCorrect={false}
+          icon="account"
           keyboardType="email-address"
           name="Name"
           placeholder="Name"
