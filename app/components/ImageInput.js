@@ -6,9 +6,8 @@ import {
   TouchableWithoutFeedback,
   Alert,
 } from "react-native";
-
-import * as ImagePicker from "expo-image-picker";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
+import * as ImagePicker from "expo-image-picker";
 
 import colors from "../config/colors";
 
@@ -16,22 +15,12 @@ function ImageInput({ imageUri, onChangeImage }) {
   useEffect(() => {
     requestPermission();
   }, []);
-  const selectImage = async () => {
-    try {
-      const res = await ImagePicker.launchImageLibraryAsync({
-        mediaTypes: ImagePicker.MediaTypeOptions.Images,
-        quality: 0.5,
-      });
-      if (!res.cancelled) onChangeImage(res.uri);
-    } catch (error) {
-      console.log("error reading an image", error);
-    }
-  };
 
   const requestPermission = async () => {
     const { granted } = await ImagePicker.requestCameraRollPermissionsAsync();
-    if (!granted) alert("You need to enable permission to access the library!");
+    if (!granted) alert("You need to enable permission to access the library.");
   };
+
   const handlePress = () => {
     if (!imageUri) selectImage();
     else
@@ -39,6 +28,18 @@ function ImageInput({ imageUri, onChangeImage }) {
         { text: "Yes", onPress: () => onChangeImage(null) },
         { text: "No" },
       ]);
+  };
+
+  const selectImage = async () => {
+    try {
+      const result = await ImagePicker.launchImageLibraryAsync({
+        mediaTypes: ImagePicker.MediaTypeOptions.Images,
+        quality: 0.5,
+      });
+      if (!result.cancelled) onChangeImage(result.uri);
+    } catch (error) {
+      console.log("Error reading an image", error);
+    }
   };
 
   return (
@@ -64,6 +65,7 @@ const styles = StyleSheet.create({
     borderRadius: 15,
     height: 100,
     justifyContent: "center",
+    marginVertical: 10,
     overflow: "hidden",
     width: 100,
   },

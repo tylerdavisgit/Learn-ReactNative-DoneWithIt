@@ -1,23 +1,31 @@
 import React from "react";
 import { StyleSheet } from "react-native";
-import { AppForm, SubmitButton } from "../../components/forms";
+import * as Yup from "yup";
 
-import AppFormField from "../../components/forms/AppFormField";
-import Screen from "../../components/Screen";
+import Screen from "../components/Screen";
+import { Form, FormField, SubmitButton } from "../components/forms";
 
-export default function RegisterScreen() {
+const validationSchema = Yup.object().shape({
+  name: Yup.string().required().label("Name"),
+  email: Yup.string().required().email().label("Email"),
+  password: Yup.string().required().min(4).label("Password"),
+});
+
+function RegisterScreen() {
   return (
     <Screen style={styles.container}>
-      <AppForm>
-        <AppFormField
+      <Form
+        initialValues={{ name: "", email: "", password: "" }}
+        onSubmit={(values) => console.log(values)}
+        validationSchema={validationSchema}
+      >
+        <FormField
           autoCorrect={false}
           icon="account"
-          keyboardType="email-address"
-          name="Name"
+          name="name"
           placeholder="Name"
-          textContentType="emailAddress"
         />
-        <AppFormField
+        <FormField
           autoCapitalize="none"
           autoCorrect={false}
           icon="email"
@@ -26,7 +34,7 @@ export default function RegisterScreen() {
           placeholder="Email"
           textContentType="emailAddress"
         />
-        <AppFormField
+        <FormField
           autoCapitalize="none"
           autoCorrect={false}
           icon="lock"
@@ -36,7 +44,7 @@ export default function RegisterScreen() {
           textContentType="password"
         />
         <SubmitButton title="Register" />
-      </AppForm>
+      </Form>
     </Screen>
   );
 }
@@ -46,3 +54,5 @@ const styles = StyleSheet.create({
     padding: 10,
   },
 });
+
+export default RegisterScreen;

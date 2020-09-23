@@ -1,10 +1,10 @@
 import React from "react";
-import { View, Text, TextInput, StyleSheet, Platform } from "react-native";
+import { View, TextInput, StyleSheet } from "react-native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 import defaultStyles from "../config/styles";
 
-export default function AppTextInput({ icon, width = "100%", ...otherProps }) {
+function AppTextInput({ icon, width = "100%", ...otherProps }) {
   return (
     <View style={[styles.container, { width }]}>
       {icon && (
@@ -36,3 +36,5 @@ const styles = StyleSheet.create({
     marginRight: 10,
   },
 });
+
+export default AppTextInput;

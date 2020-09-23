@@ -1,20 +1,22 @@
 import React from "react";
-import { StyleSheet, Text, View, Image } from "react-native";
-import AppText from "../../components/AppText";
+import { View, Image, StyleSheet } from "react-native";
 
-import ListItem from "../../components/ListItem";
-import colors from "../../config/colors";
+import colors from "../config/colors";
+import ListItem from "../components/lists/ListItem";
+import Text from "../components/Text";
 
-export default function ListingDetailsScreen() {
+function ListingDetailsScreen({ route }) {
+  const listing = route.params;
+
   return (
     <View>
-      <Image style={styles.image} source={require("../../assets/jacket.jpg")} />
+      <Image style={styles.image} source={listing.image} />
       <View style={styles.detailsContainer}>
-        <AppText style={styles.title}>Red jacket for sale</AppText>
-        <AppText style={styles.price}>$100</AppText>
+        <Text style={styles.title}>{listing.title}</Text>
+        <Text style={styles.price}>${listing.price}</Text>
         <View style={styles.userContainer}>
           <ListItem
-            image={require("../mosh.jpg")}
+            image={require("../assets/mosh.jpg")}
             title="Mosh Hamedani"
             subTitle="5 Listings"
           />
@@ -46,3 +48,5 @@ const styles = StyleSheet.create({
     marginVertical: 40,
   },
 });
+
+export default ListingDetailsScreen;

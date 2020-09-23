@@ -1,34 +1,33 @@
 import React from "react";
-import { StyleSheet, View, Image, TouchableHighlight } from "react-native";
-
+import { View, StyleSheet, Image, TouchableHighlight } from "react-native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import Swipeable from "react-native-gesture-handler/Swipeable";
 
-import AppText from "./AppText";
-import colors from "../config/colors";
+import Text from "../Text";
+import colors from "../../config/colors";
 
-export default function ListItem({
+function ListItem({
   title,
   subTitle,
   image,
+  IconComponent,
   onPress,
   renderRightActions,
-  IconComponent,
 }) {
   return (
     <Swipeable renderRightActions={renderRightActions}>
       <TouchableHighlight underlayColor={colors.light} onPress={onPress}>
         <View style={styles.container}>
           {IconComponent}
-          {image && <Image source={image} style={styles.image} />}
+          {image && <Image style={styles.image} source={image} />}
           <View style={styles.detailsContainer}>
-            <AppText numberOfLines={1} style={styles.title}>
+            <Text style={styles.title} numberOfLines={1}>
               {title}
-            </AppText>
+            </Text>
             {subTitle && (
-              <AppText numberOfLines={2} style={styles.subTitle}>
+              <Text style={styles.subTitle} numberOfLines={2}>
                 {subTitle}
-              </AppText>
+              </Text>
             )}
           </View>
           <MaterialCommunityIcons
@@ -50,8 +49,8 @@ const styles = StyleSheet.create({
     backgroundColor: colors.white,
   },
   detailsContainer: {
-    marginLeft: 10,
     flex: 1,
+    marginLeft: 10,
     justifyContent: "center",
   },
   image: {
@@ -66,3 +65,5 @@ const styles = StyleSheet.create({
     fontWeight: "500",
   },
 });
+
+export default ListItem;
