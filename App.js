@@ -1,4 +1,5 @@
 import React from "react";
+
 import { Text, Button } from "react-native";
 import { createStackNavigator } from "@react-navigation/stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
@@ -9,11 +10,15 @@ import Screen from "./app/components/Screen";
 import AppNavigator from "./app/navigation/appNavigator";
 import AuthNavigator from "./app/navigation/AuthNavigator";
 import navigationTheme from "./app/navigation/navigationTheme";
+import OfflineNotice from "./app/components/OfflineNotice";
 
 export default function App() {
   return (
-    <NavigationContainer theme={navigationTheme}>
-      <AppNavigator />
-    </NavigationContainer>
+    <>
+      <OfflineNotice />
+      <NavigationContainer theme={navigationTheme}>
+        <AppNavigator />
+      </NavigationContainer>
+    </>
   );
 }
