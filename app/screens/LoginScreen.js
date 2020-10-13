@@ -10,6 +10,7 @@ import {
   SubmitButton,
 } from "../components/forms";
 import authApi from "../api/auth";
+import useAuth from "../auth/useAuth";
 
 const validationSchema = Yup.object().shape({
   email: Yup.string().required().email().label("Email"),
@@ -17,14 +18,14 @@ const validationSchema = Yup.object().shape({
 });
 
 function LoginScreen(props) {
-  const { logIn } = useAuth();
+  const auth = useAuth();
   const [loginFailed, setLoginFailed] = useState(false);
 
   const handleSubmit = async ({ email, password }) => {
-    const res = await authApi.login(email, password);
-    if (!res.ok) return setLoginFailed(true);
+    const result = await authApi.login(email, password);
+    if (!result.ok) return setLoginFailed(true);
     setLoginFailed(false);
-    logIn(res.data);
+    auth.logIn(result.data);
   };
 
   return (
@@ -37,7 +38,7 @@ function LoginScreen(props) {
         validationSchema={validationSchema}
       >
         <ErrorMessage
-          error="Invalid email and/or password"
+          error="Invalid email and/or password."
           visible={loginFailed}
         />
         <FormField

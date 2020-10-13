@@ -8,6 +8,7 @@ import Text from "../components/Text";
 
 function ListingDetailsScreen({ route }) {
   const listing = route.params;
+
   return (
     <View>
       <Image

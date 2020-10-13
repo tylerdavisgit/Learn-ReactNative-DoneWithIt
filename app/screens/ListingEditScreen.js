@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { StyleSheet } from "react-native";
-import { Formik } from "formik";
 import * as Yup from "yup";
 
 import {
@@ -13,8 +12,8 @@ import CategoryPickerItem from "../components/CategoryPickerItem";
 import Screen from "../components/Screen";
 import FormImagePicker from "../components/forms/FormImagePicker";
 import listingsApi from "../api/listings";
-import UploadScreen from "../screens/UploadScreen";
 import useLocation from "../hooks/useLocation";
+import UploadScreen from "./UploadScreen";
 
 const validationSchema = Yup.object().shape({
   title: Yup.string().required().min(1).label("Title"),
@@ -89,12 +88,12 @@ function ListingEditScreen() {
   const handleSubmit = async (listing, { resetForm }) => {
     setProgress(0);
     setUploadVisible(true);
-    const res = await listingsApi.addListing(
+    const result = await listingsApi.addListing(
       { ...listing, location },
       (progress) => setProgress(progress)
     );
 
-    if (!res.ok) {
+    if (!result.ok) {
       setUploadVisible(false);
       return alert("Could not save the listing");
     }

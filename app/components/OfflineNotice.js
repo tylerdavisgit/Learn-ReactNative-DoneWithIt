@@ -8,6 +8,7 @@ import colors from "../config/colors";
 
 function OfflineNotice(props) {
   const netInfo = useNetInfo();
+
   if (netInfo.type !== "unknown" && netInfo.isInternetReachable === false)
     return (
       <View style={styles.container}>
@@ -21,7 +22,6 @@ function OfflineNotice(props) {
 const styles = StyleSheet.create({
   container: {
     alignItems: "center",
-
     backgroundColor: colors.primary,
     height: 50,
     justifyContent: "center",

@@ -1,15 +1,11 @@
 import React from "react";
-import { StyleSheet, View, Modal } from "react-native";
+import { View, StyleSheet, Modal } from "react-native";
 import * as Progress from "react-native-progress";
 import LottieView from "lottie-react-native";
 
 import colors from "../config/colors";
 
-export default function UploadScreen({
-  onDone,
-  progress = 0,
-  visible = false,
-}) {
+function UploadScreen({ onDone, progress = 0, visible = false }) {
   return (
     <Modal visible={visible}>
       <View style={styles.container}>
@@ -43,3 +39,5 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
 });
+
+export default UploadScreen;
